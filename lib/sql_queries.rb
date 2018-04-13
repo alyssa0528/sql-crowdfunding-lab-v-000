@@ -33,18 +33,18 @@ end
 
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_amount_and_users_name
 "SELECT users.name, SUM(pledges.amount)
-FROM users
-LEFT JOIN pledges
-ON users.id = pledges.user_id
+FROM pledges
+LEFT JOIN users
+ON pledges.user_id = users.id
 GROUP BY users.name
-ORDER BY pledges.amount;"
+ORDER BY pledges.amount AND users.name;"
 end
 
 def selects_the_category_names_and_pledge_amounts_of_all_pledges_in_the_music_category
 "SELECT projects.category, SUM(pledges.amount)
-FROM pledges
-LEFT JOIN projects
-ON pledges.project_id = projects.id 
+FROM projects
+LEFT JOIN pledges
+ON projects.id = pledges.project_id
 WHERE projects.category = 'music'
 GROUP BY pledges.id;"
 end
